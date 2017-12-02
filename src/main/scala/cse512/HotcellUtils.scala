@@ -7,12 +7,12 @@ import java.util.Calendar
 object HotcellUtils {
   val coordinateStep = 0.01
 
-  def CalculateCoordinate(inputString: String, coordinateOffset: Int): Int = {
+  def CalculateCoordinate (inputString: String, coordinateOffset: Int): Int = {
     // Configuration variable:
     // Coordinate step is the size of each cell on x and y
     var result = 0
     coordinateOffset match {
-      case 0 => result = Math.floor((inputString.split(",")(0).replace("(","").toDouble/coordinateStep)).toInt
+      case 0 => result = Math.floor(inputString.split(",")(0).replace("(","").toDouble/coordinateStep).toInt
       case 1 => result = Math.floor(inputString.split(",")(1).replace(")","").toDouble/coordinateStep).toInt
       // We only consider the data from 2009 to 2012 inclusively, 4 years in total. Week 0 Day 0 is 2009-01-01
       case 2 => {
@@ -43,4 +43,13 @@ object HotcellUtils {
   }
 
   // YOU NEED TO CHANGE THIS PART
+
+  /**
+    * Extend a coordinate to its neighbor coordinates (including itself).
+    * @param coordinate
+    * @return List[coordinate]
+    */
+  def extendCoordinate (coordinate: Int): List[Int] = {
+    return List(coordinate - 1, coordinate, coordinate + 1)
+  }
 }
